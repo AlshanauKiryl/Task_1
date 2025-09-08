@@ -1,8 +1,11 @@
+import logging
+logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w")
 def delete_data(conn):
     '''Удаляет все записи из таблиц students и rooms.'''
     cursor = conn.cursor()
     cursor.execute("DELETE FROM students")
     cursor.execute("DELETE FROM rooms")
+    logging.info('Deleting records from students and rooms')
     conn.commit()
 
 def create_indexes(conn):
@@ -13,6 +16,7 @@ def create_indexes(conn):
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_student_birthday ON students(birthday);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_student_sex ON students(sex);")
     cursor.execute("CREATE INDEX IF NOT EXISTS idx_room_name ON rooms(name);")
+    logging.info('Creating indexes')
     conn.commit()
 
 def count_students_into_rooms(conn):

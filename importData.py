@@ -1,4 +1,7 @@
 import json
+import logging
+logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w")
+
 
 def load_data(conn, student_path, room_path):
     '''Принимает пути хранения двух json файлов, считывает их и заносит в БД'''
@@ -18,4 +21,5 @@ def load_data(conn, student_path, room_path):
                     student["sex"],
                 )
             )
+    logging.info(f'Importing data from {student_path} and {room_path}')
     conn.commit()

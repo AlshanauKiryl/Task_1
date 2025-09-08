@@ -2,6 +2,8 @@ import json
 import xml.etree.ElementTree as ET
 from decimal import Decimal
 from datetime import date, datetime
+import logging
+logging.basicConfig(level=logging.INFO, filename="py_log.log",filemode="w")
 
 
 def dump_data(data, format: str, filename: str):
@@ -21,6 +23,7 @@ def dump_json(data, filename: str):
     '''Сохраняет переданные данные в json файл с переданным названием'''
     with open(f"{filename}.json", 'w', encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2, default=serialize_data)
+    logging.info(f'Query result saved in {filename}.json')
 
 
 def dump_xml(data, filename: str):
@@ -49,6 +52,7 @@ def dump_xml(data, filename: str):
 
     tree = ET.ElementTree(root)
     tree.write(f"{filename}.xml", encoding="utf-8", xml_declaration=True)
+    logging.info(f'Query result saved in {filename}.xml')
 
 
 def serialize_data(obj):

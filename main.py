@@ -16,6 +16,7 @@ def main():
         rooms_path = 'rooms.json'
         output_format = 'json'
 
+
     conn = connection.connection()
     delete_data(conn)
     importData.load_data(conn,
